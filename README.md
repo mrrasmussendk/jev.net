@@ -108,7 +108,7 @@ dotnet test
 The package id is `Jet.net`. The version is never hard-coded in the csproj for a release; it comes from the tag or the command line.
 
 **Option 1: tag and let GitHub Actions publish (recommended).**
-One-time setup: create an API key at https://www.nuget.org/account/apikeys (scope "Push", glob `Jet.net`) and store it as the repository secret `NUGET_API_KEY`. Then:
+No secrets are stored: the workflow uses NuGet Trusted Publishing. A trusted publisher policy on nuget.org (Account > API keys > Trusted publishing) is bound to repository `mrrasmussendk/jev.net`, workflow `release.yml` and environment `production`; the `NuGet/login` action exchanges the job's OIDC token for a short-lived API key. Then:
 
 ```
 git tag v1.2.3
@@ -116,6 +116,8 @@ git push origin v1.2.3
 ```
 
 The `Release to NuGet` workflow builds, tests, packs `Jet.net.1.2.3.nupkg` plus a `.snupkg` symbol package, pushes both to nuget.org, and creates a GitHub release with generated notes and the packages attached. You can also start it by hand from the Actions tab with a version number.
+
+Note: the policy's scope must allow creating new packages for the very first release ("Push new packages and package versions"). "Push only new package versions" is enough once `Jet.net` exists on nuget.org.
 
 **Option 2: from your machine.**
 

@@ -5,8 +5,10 @@ name: Release to NuGet
 # The package version is taken from the tag (leading "v" stripped), so the
 # csproj VersionPrefix never has to be bumped by hand.
 #
-# Required repository secret: NUGET_API_KEY (an api key from https://www.nuget.org/account/apikeys
-# scoped to "Push" for the Jet.net package id).
+# Authentication uses NuGet Trusted Publishing (OIDC): no long-lived secret.
+# The trusted publisher policy on nuget.org must match this exactly:
+#   owner mrrasmussendk / repository jev.net / workflow release.yml / environment production
+# The NuGet/login action exchanges the GitHub id-token for a short-lived API key.
 
 on:
   push:
@@ -18,11 +20,13 @@ on:
         required: true
 
 permissions:
-  contents: write   # to create the GitHub release
+  contents: write   # create the GitHub release
+  id-token: write   # mint the OIDC token for NuGet trusted publishing
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: production   # must match the environment in the nuget.org trusted publisher policy
     steps:
       - uses: actions/checkout@v4
         with:
@@ -54,10 +58,16 @@ jobs:
           -p:Version=${{ steps.version.outputs.version }}
           --output artifacts
 
+      - name: Get a short-lived NuGet API key via trusted publishing
+        id: nuget-login
+        uses: NuGet/login@v1
+        with:
+          user: mrrasmussendk
+
       - name: Push to nuget.org
         run: >
           dotnet nuget push "artifacts/*.nupkg"
-          --api-key ${{ secrets.NUGET_API_KEY }}
+          --api-key ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
           --source https://api.nuget.org/v3/index.json
           --skip-duplicate
 
