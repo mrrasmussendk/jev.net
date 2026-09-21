@@ -1,0 +1,71 @@
+name: Release to NuGet
+
+# Publishes when a version tag is pushed, e.g.:
+#   git tag v1.2.3 && git push origin v1.2.3
+# The package version is taken from the tag (leading "v" stripped), so the
+# csproj VersionPrefix never has to be bumped by hand.
+#
+# Required repository secret: NUGET_API_KEY (an api key from https://www.nuget.org/account/apikeys
+# scoped to "Push" for the Jet.net package id).
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Package version to publish (e.g. 1.2.3)"
+        required: true
+
+permissions:
+  contents: write   # to create the GitHub release
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history so SourceLink can embed commit info
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Resolve version
+        id: version
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION="${GITHUB_REF_NAME#v}"
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Publishing version $VERSION"
+
+      - run: dotnet restore
+      - run: dotnet build --no-restore --configuration Release -p:Version=${{ steps.version.outputs.version }}
+      - run: dotnet test --no-build --configuration Release
+
+      - name: Pack
+        run: >
+          dotnet pack Jet.net/Jet.net.csproj --no-build --configuration Release
+          -p:Version=${{ steps.version.outputs.version }}
+          --output artifacts
+
+      - name: Push to nuget.org
+        run: >
+          dotnet nuget push "artifacts/*.nupkg"
+          --api-key ${{ secrets.NUGET_API_KEY }}
+          --source https://api.nuget.org/v3/index.json
+          --skip-duplicate
+
+      - name: Create GitHub release
+        if: github.event_name == 'push'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            artifacts/*.nupkg
+            artifacts/*.snupkg
+          generate_release_notes: true
