@@ -1,4 +1,4 @@
-# Jet.net
+# Jev.net
 
 A small, dependency-light .NET client for the TypeSafe **JEV** evaluation endpoint
 (`POST https://api.typesafe.ai/v1/systemone`). Built on `HttpClient` and `System.Text.Json`;
