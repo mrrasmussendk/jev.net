@@ -1,4 +1,4 @@
-namespace Jet.net;
+namespace Jev.net;
 
 /// <summary>
 /// Client for the TypeSafe JEV evaluation endpoint. Inject this in your services; see

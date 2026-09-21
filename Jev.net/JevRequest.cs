@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Jet.net;
+namespace Jev.net;
 
 /// <summary>The full request body for the evaluation endpoint.</summary>
 public sealed class JevRequest

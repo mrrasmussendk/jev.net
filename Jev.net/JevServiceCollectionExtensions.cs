@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Jet.net;
+namespace Jev.net;
 
 /// <summary>Registers <see cref="IJevClient"/> in the DI container.</summary>
 /// <example>

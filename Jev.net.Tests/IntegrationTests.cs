@@ -1,4 +1,4 @@
-namespace Jet.net.Tests;
+namespace Jev.net.Tests;
 
 /// <summary>
 /// Real calls to api.typesafe.ai. These run only when JEV_API_KEY (or TYPESAFE_API_KEY) is set,

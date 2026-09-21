@@ -1,4 +1,4 @@
-namespace Jet.net;
+namespace Jev.net;
 
 /// <summary>
 /// Fluent builder for a multi-question evaluation of one state.

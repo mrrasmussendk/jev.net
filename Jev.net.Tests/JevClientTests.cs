@@ -2,7 +2,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
-namespace Jet.net.Tests;
+namespace Jev.net.Tests;
 
 [TestClass]
 public class JevClientTests

@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace Jet.net.Tests;
+namespace Jev.net.Tests;
 
 /// <summary>A scriptable <see cref="HttpMessageHandler"/> that records every request.</summary>
 internal sealed class FakeHandler : HttpMessageHandler

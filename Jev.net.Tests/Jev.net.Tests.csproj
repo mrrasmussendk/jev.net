@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Jet.net\Jet.net.csproj" />
+    <ProjectReference Include="..\Jev.net\Jev.net.csproj" />
   </ItemGroup>
 
 </Project>

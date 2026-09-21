@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Jet.net.Tests;
+namespace Jev.net.Tests;
 
 [TestClass]
 public class ServiceCollectionTests

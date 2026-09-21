@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jet.net", "Jet.net\Jet.net.csproj", "{A11F8D6E-37AF-4148-A73B-CB20F784BE17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jev.net", "Jev.net\Jev.net.csproj", "{A11F8D6E-37AF-4148-A73B-CB20F784BE17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jet.net.Tests", "Jet.net.Tests\Jet.net.Tests.csproj", "{0A34EA55-2E7B-4902-9156-7FDA8B591878}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jev.net.Tests", "Jev.net.Tests\Jev.net.Tests.csproj", "{0A34EA55-2E7B-4902-9156-7FDA8B591878}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

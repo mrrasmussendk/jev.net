@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Jet.net;
+namespace Jev.net;
 
 /// <summary>Thrown when the API returns a non-success status code (after retries, for 429/529).</summary>
 public class JevApiException : Exception

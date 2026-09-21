@@ -54,7 +54,7 @@ jobs:
 
       - name: Pack
         run: >
-          dotnet pack Jet.net/Jet.net.csproj --no-build --configuration Release
+          dotnet pack Jev.net/Jev.net.csproj --no-build --configuration Release
           -p:Version=${{ steps.version.outputs.version }}
           --output artifacts
 

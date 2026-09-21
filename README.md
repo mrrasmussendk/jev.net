@@ -105,7 +105,7 @@ dotnet test
 
 ## Releasing to NuGet
 
-The package id is `Jet.net`. The version is never hard-coded in the csproj for a release; it comes from the tag or the command line.
+The package id is `Jev.net`. The version is never hard-coded in the csproj for a release; it comes from the tag or the command line.
 
 **Option 1: tag and let GitHub Actions publish (recommended).**
 No secrets are stored: the workflow uses NuGet Trusted Publishing. A trusted publisher policy on nuget.org (Account > API keys > Trusted publishing) is bound to repository `mrrasmussendk/jev.net`, workflow `release.yml` and environment `production`; the `NuGet/login` action exchanges the job's OIDC token for a short-lived API key. Then:
@@ -115,9 +115,9 @@ git tag v1.2.3
 git push origin v1.2.3
 ```
 
-The `Release to NuGet` workflow builds, tests, packs `Jet.net.1.2.3.nupkg` plus a `.snupkg` symbol package, pushes both to nuget.org, and creates a GitHub release with generated notes and the packages attached. You can also start it by hand from the Actions tab with a version number.
+The `Release to NuGet` workflow builds, tests, packs `Jev.net.1.2.3.nupkg` plus a `.snupkg` symbol package, pushes both to nuget.org, and creates a GitHub release with generated notes and the packages attached. You can also start it by hand from the Actions tab with a version number.
 
-Note: the policy's scope must allow creating new packages for the very first release ("Push new packages and package versions"). "Push only new package versions" is enough once `Jet.net` exists on nuget.org.
+Note: the policy's scope must allow creating new packages for the very first release ("Push new packages and package versions"). "Push only new package versions" is enough once `Jev.net` exists on nuget.org.
 
 **Option 2: from your machine.**
 
@@ -130,14 +130,14 @@ Note: the policy's scope must allow creating new packages for the very first rel
 **Option 3: plain dotnet CLI.**
 
 ```
-dotnet pack Jet.net/Jet.net.csproj -c Release -p:Version=1.2.3 -o artifacts
-dotnet nuget push artifacts/Jet.net.1.2.3.nupkg --api-key <key> --source https://api.nuget.org/v3/index.json
+dotnet pack Jev.net/Jev.net.csproj -c Release -p:Version=1.2.3 -o artifacts
+dotnet nuget push artifacts/Jev.net.1.2.3.nupkg --api-key <key> --source https://api.nuget.org/v3/index.json
 ```
 
 **Publishing to GitHub Packages instead** (private or pre-release feed):
 
 ```
-dotnet nuget push artifacts/Jet.net.1.2.3.nupkg --api-key <github token with write:packages> --source https://nuget.pkg.github.com/mrrasmussendk/index.json
+dotnet nuget push artifacts/Jev.net.1.2.3.nupkg --api-key <github token with write:packages> --source https://nuget.pkg.github.com/mrrasmussendk/index.json
 ```
 
 Every push to `main`/`master` and every pull request also runs the `CI` workflow, which builds, tests and packs (without publishing) so packaging breakage is caught early.

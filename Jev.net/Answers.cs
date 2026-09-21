@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Text.Json.Serialization;
 
-namespace Jet.net;
+namespace Jev.net;
 
 /// <summary>Base class for the three JEV answer types.</summary>
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]

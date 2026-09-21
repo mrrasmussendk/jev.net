@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Jet.net.Tests;
+namespace Jev.net.Tests;
 
 [TestClass]
 public class JevApiExceptionTests

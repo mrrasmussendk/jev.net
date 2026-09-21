@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-    Build, test and pack Jet.net; optionally push to nuget.org.
+    Build, test and pack Jev.net; optionally push to nuget.org.
 
 .EXAMPLE
-    ./release.ps1 -Version 1.2.3                 # pack only -> ./artifacts/Jet.net.1.2.3.nupkg
+    ./release.ps1 -Version 1.2.3                 # pack only -> ./artifacts/Jev.net.1.2.3.nupkg
     ./release.ps1 -Version 1.2.3 -Push           # pack and push using $env:NUGET_API_KEY
     ./release.ps1 -Version 1.2.3 -Push -ApiKey oy2...
     ./release.ps1 -Version 1.2.3 -Push -Source https://nuget.pkg.github.com/mrrasmussendk/index.json
@@ -27,17 +27,17 @@ $artifacts = Join-Path $PSScriptRoot 'artifacts'
 if (Test-Path $artifacts) { Remove-Item $artifacts -Recurse -Force }
 
 Write-Host "==> Building $Version" -ForegroundColor Cyan
-dotnet build Jet.net.sln --configuration Release "-p:Version=$Version"
+dotnet build Jev.net.sln --configuration Release "-p:Version=$Version"
 if ($LASTEXITCODE) { exit $LASTEXITCODE }
 
 if (-not $SkipTests) {
     Write-Host '==> Testing' -ForegroundColor Cyan
-    dotnet test Jet.net.sln --no-build --configuration Release
+    dotnet test Jev.net.sln --no-build --configuration Release
     if ($LASTEXITCODE) { exit $LASTEXITCODE }
 }
 
 Write-Host '==> Packing' -ForegroundColor Cyan
-dotnet pack Jet.net/Jet.net.csproj --no-build --configuration Release "-p:Version=$Version" --output $artifacts
+dotnet pack Jev.net/Jev.net.csproj --no-build --configuration Release "-p:Version=$Version" --output $artifacts
 if ($LASTEXITCODE) { exit $LASTEXITCODE }
 
 Get-ChildItem $artifacts | ForEach-Object { Write-Host "    $($_.Name)" }
@@ -52,8 +52,8 @@ if (-not $ApiKey) {
 }
 
 Write-Host "==> Pushing to $Source" -ForegroundColor Cyan
-dotnet nuget push (Join-Path $artifacts "Jet.net.$Version.nupkg") --api-key $ApiKey --source $Source --skip-duplicate
+dotnet nuget push (Join-Path $artifacts "Jev.net.$Version.nupkg") --api-key $ApiKey --source $Source --skip-duplicate
 if ($LASTEXITCODE) { exit $LASTEXITCODE }
 
-Write-Host "`nPublished Jet.net $Version. Tag it so the source matches the package:" -ForegroundColor Green
+Write-Host "`nPublished Jev.net $Version. Tag it so the source matches the package:" -ForegroundColor Green
 Write-Host "    git tag v$Version; git push origin v$Version"

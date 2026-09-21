@@ -1,4 +1,4 @@
-namespace Jet.net;
+namespace Jev.net;
 
 /// <summary>
 /// Zero-setup static entry point. Set <see cref="ApiKey"/> once (or the JEV_API_KEY environment

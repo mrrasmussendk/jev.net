@@ -1,4 +1,4 @@
-namespace Jet.net;
+namespace Jev.net;
 
 /// <summary>Configuration for <see cref="JevClient"/>.</summary>
 public sealed class JevOptions

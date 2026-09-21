@@ -20,7 +20,7 @@ jobs:
       - run: dotnet test --no-build --configuration Release
 
       # Prove the package can be produced on every change.
-      - run: dotnet pack Jet.net/Jet.net.csproj --no-build --configuration Release --output artifacts
+      - run: dotnet pack Jev.net/Jev.net.csproj --no-build --configuration Release --output artifacts
       - uses: actions/upload-artifact@v4
         with:
           name: nupkg

@@ -4,7 +4,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Jet.net;
+namespace Jev.net;
 
 /// <summary>
 /// HTTP client for the TypeSafe JEV evaluation endpoint (POST /v1/systemone).
