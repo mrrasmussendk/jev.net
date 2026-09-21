@@ -62,7 +62,7 @@ jobs:
         id: nuget-login
         uses: NuGet/login@v1
         with:
-          user: mrrasmussendk
+          user: marcrasmussendk   # nuget.org username of the account that created the trusted publisher policy
 
       - name: Push to nuget.org
         run: >
