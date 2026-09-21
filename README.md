@@ -141,3 +141,4 @@ dotnet nuget push artifacts/Jet.net.1.2.3.nupkg --api-key <github token with wri
 ```
 
 Every push to `main`/`master` and every pull request also runs the `CI` workflow, which builds, tests and packs (without publishing) so packaging breakage is caught early.
+
